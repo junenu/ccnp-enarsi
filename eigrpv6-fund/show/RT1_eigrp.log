@@ -1,0 +1,29 @@
+RT1#show ipv6 eigrp neighbors 
+EIGRP-IPv6 Neighbors for AS(100)
+H   Address                 Interface              Hold Uptime   SRTT   RTO  Q  Seq
+                                                   (sec)         (ms)       Cnt Num
+0   Link-local address:     Gi0/1                    12 00:40:59   86   516  0  18
+    FE80::2
+RT1#show ipv6 eigrp add       
+RT1#show e             
+RT1#show eig  
+RT1#show eigrp add
+RT1#show eigrp address-family ipv6 topology
+EIGRP-IPv6 Topology Table for AS(100)/ID(10.0.0.1)
+Codes: P - Passive, A - Active, U - Update, Q - Query, R - Reply,
+       r - reply Status, s - sia Status 
+
+P 2001:DBB:0:12::/64, 1 successors, FD is 2816
+        via Connected, GigabitEthernet0/1
+P ::/0, 1 successors, FD is 2816
+        via Summary (2816/0), Null0
+P 2001:DBB:1:1::/64, 1 successors, FD is 2816
+        via Connected, GigabitEthernet0/2
+P 2001:DBB:1::/48, 1 successors, FD is 2816
+        via Summary (2816/0), Null0
+P 2001:DBB:2::/48, 1 successors, FD is 2848
+        via FE80::2 (2848/288), GigabitEthernet0/1
+P 2001:DBB:1::1/128, 1 successors, FD is 128256
+        via Connected, Loopback0
+
+RT1#show eigrp address-family ipv4 topology
