@@ -1,0 +1,15 @@
+desktop1:~$ ping 2001:dbb:0:2:5054:ff:fe0b:beb6
+PING 2001:dbb:0:2:5054:ff:fe0b:beb6 (2001:dbb:0:2:5054:ff:fe0b:beb6): 56 data bytes
+64 bytes from 2001:dbb:0:2:5054:ff:fe0b:beb6: seq=0 ttl=61 time=2.572 ms
+64 bytes from 2001:dbb:0:2:5054:ff:fe0b:beb6: seq=1 ttl=61 time=2.857 ms
+64 bytes from 2001:dbb:0:2:5054:ff:fe0b:beb6: seq=2 ttl=61 time=3.114 ms
+64 bytes from 2001:dbb:0:2:5054:ff:fe0b:beb6: seq=3 ttl=61 time=3.576 ms
+64 bytes from 2001:dbb:0:2:5054:ff:fe0b:beb6: seq=4 ttl=61 time=3.413 ms
+64 bytes from 2001:dbb:0:2:5054:ff:fe0b:beb6: seq=5 ttl=61 time=3.005 ms
+64 bytes from 2001:dbb:0:2:5054:ff:fe0b:beb6: seq=6 ttl=61 time=3.017 ms
+64 bytes from 2001:dbb:0:2:5054:ff:fe0b:beb6: seq=7 ttl=61 time=2.831 ms
+64 bytes from 2001:dbb:0:2:5054:ff:fe0b:beb6: seq=8 ttl=61 time=2.659 ms
+^C
+--- 2001:dbb:0:2:5054:ff:fe0b:beb6 ping statistics ---
+9 packets transmitted, 9 packets received, 0% packet loss
+round-trip min/avg/max = 2.572/3.004/3.576 ms
