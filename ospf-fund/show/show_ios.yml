@@ -1,0 +1,28 @@
+- name: Get router config and save to log file
+  hosts: ios
+  gather_facts: no
+  
+  tasks:
+  - name: Get router config
+    ios_command:
+      commands:
+        - "{{ item }}"
+    with_items: " {{ show_commands }}"
+    register: result
+    
+    vars:
+      show_commands:
+      - "show run"
+      - "show ip int brief"
+      - "show ip route | begin Gateway"
+      - "show ip ospf neighbor"
+      - "show ip ospf interface brief"
+      - "show ip ospf database"
+      - "show ip ospf database router"
+      - "show ip ospf database network"
+      - "show ip ospf database summary"
+
+  - name: Save config to log file
+    template:
+      src: stdout.j2
+      dest: log/{{ inventory_hostname }}.log

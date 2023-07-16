@@ -1,0 +1,22 @@
+Host3:~$ ping 192.168.1.2 -c 5
+PING 192.168.1.2 (192.168.1.2): 56 data bytes
+64 bytes from 192.168.1.2: seq=0 ttl=42 time=3.700 ms
+64 bytes from 192.168.1.2: seq=1 ttl=42 time=3.955 ms
+64 bytes from 192.168.1.2: seq=2 ttl=42 time=3.280 ms
+64 bytes from 192.168.1.2: seq=3 ttl=42 time=3.103 ms
+64 bytes from 192.168.1.2: seq=4 ttl=42 time=3.216 ms
+
+--- 192.168.1.2 ping statistics ---
+5 packets transmitted, 5 packets received, 0% packet loss
+round-trip min/avg/max = 3.103/3.450/3.955 ms
+Host3:~$ ping 192.168.3.2 -c 5
+PING 192.168.3.2 (192.168.3.2): 56 data bytes
+64 bytes from 192.168.3.2: seq=0 ttl=42 time=4.652 ms
+64 bytes from 192.168.3.2: seq=1 ttl=42 time=4.083 ms
+64 bytes from 192.168.3.2: seq=2 ttl=42 time=3.958 ms
+64 bytes from 192.168.3.2: seq=3 ttl=42 time=4.330 ms
+64 bytes from 192.168.3.2: seq=4 ttl=42 time=4.632 ms
+
+--- 192.168.3.2 ping statistics ---
+5 packets transmitted, 5 packets received, 0% packet loss
+round-trip min/avg/max = 3.958/4.331/4.652 ms

@@ -1,0 +1,367 @@
+=============show run=============
+
+Building configuration...
+
+Current configuration : 3444 bytes
+!
+! Last configuration change at 15:00:29 UTC Tue Jul 11 2023
+!
+version 15.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname RT6
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable password 7 03055F060F01
+!
+no aaa new-model
+!
+!
+!
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+ip vrf mgmt
+!
+!
+ip dhcp pool DHCPPOOL
+ network 192.168.6.0 255.255.255.0
+ default-router 192.168.6.1 
+ lease 7
+!
+!
+!
+no ip domain lookup
+ip domain name ainas.dev
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+username admin password 7 15130F010D24
+!
+redundancy
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 10.0.0.6 255.255.255.255
+!
+interface GigabitEthernet0/0
+ ip address 192.168.6.1 255.255.255.0
+ ip ospf 100 area 56
+ duplex auto
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/1
+ ip address 10.56.1.6 255.255.255.0
+ ip ospf network point-to-point
+ ip ospf 100 area 56
+ duplex auto
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/2
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/3
+ ip vrf forwarding mgmt
+ ip address 192.168.10.226 255.255.254.0
+ duplex auto
+ speed auto
+ media-type rj45
+!
+router ospf 100
+ router-id 10.0.0.6
+ passive-interface GigabitEthernet0/0
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip ssh version 2
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+banner exec ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner incoming ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner login ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+!
+line con 0
+line aux 0
+line vty 0 4
+ login local
+ transport input ssh
+!
+no scheduler allocate
+!
+end
+
+=============show ip int brief=============
+
+Interface                  IP-Address      OK? Method Status                Protocol
+GigabitEthernet0/0         192.168.6.1     YES manual up                    up      
+GigabitEthernet0/1         10.56.1.6       YES manual up                    up      
+GigabitEthernet0/2         unassigned      YES unset  administratively down down    
+GigabitEthernet0/3         192.168.10.226  YES manual up                    up      
+Loopback0                  10.0.0.6        YES manual up                    up
+
+=============show ip route | begin Gateway=============
+
+Gateway of last resort is not set
+
+      10.0.0.0/8 is variably subnetted, 8 subnets, 2 masks
+O IA     10.0.0.1/32 [110/5] via 10.56.1.5, 01:07:33, GigabitEthernet0/1
+O IA     10.0.0.3/32 [110/5] via 10.56.1.5, 01:07:33, GigabitEthernet0/1
+C        10.0.0.6/32 is directly connected, Loopback0
+O IA     10.24.1.0/24 [110/3] via 10.56.1.5, 01:07:33, GigabitEthernet0/1
+O IA     10.45.1.0/24 [110/2] via 10.56.1.5, 01:07:33, GigabitEthernet0/1
+C        10.56.1.0/24 is directly connected, GigabitEthernet0/1
+L        10.56.1.6/32 is directly connected, GigabitEthernet0/1
+O IA     10.123.1.0/24 [110/4] via 10.56.1.5, 01:07:33, GigabitEthernet0/1
+O IA  192.168.1.0/24 [110/5] via 10.56.1.5, 01:07:33, GigabitEthernet0/1
+O IA  192.168.3.0/24 [110/5] via 10.56.1.5, 01:03:13, GigabitEthernet0/1
+      192.168.6.0/24 is variably subnetted, 2 subnets, 2 masks
+C        192.168.6.0/24 is directly connected, GigabitEthernet0/0
+L        192.168.6.1/32 is directly connected, GigabitEthernet0/0
+
+=============show ip ospf neighbor=============
+
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+10.0.0.5          0   FULL/  -        00:00:34    10.56.1.5       GigabitEthernet0/1
+
+=============show ip ospf interface brief=============
+
+Interface    PID   Area            IP Address/Mask    Cost  State Nbrs F/C
+Gi0/0        100   56              192.168.6.1/24     1     DR    0/0
+Gi0/1        100   56              10.56.1.6/24       1     P2P   1/1
+
+=============show ip ospf database=============
+
+OSPF Router with ID (10.0.0.6) (Process ID 100)
+
+		Router Link States (Area 56)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+10.0.0.5        10.0.0.5        76          0x80000005 0x00570D 2
+10.0.0.6        10.0.0.6        85          0x80000007 0x00F5EA 3
+
+		Summary Net Link States (Area 56)
+
+Link ID         ADV Router      Age         Seq#       Checksum
+10.0.0.1        10.0.0.5        334         0x80000003 0x00A874
+10.0.0.3        10.0.0.5        334         0x80000003 0x009486
+10.24.1.0       10.0.0.5        334         0x80000003 0x007294
+10.45.1.0       10.0.0.5        334         0x80000003 0x006B87
+10.123.1.0      10.0.0.5        334         0x80000003 0x00D3CE
+192.168.1.0     10.0.0.5        334         0x80000003 0x007845
+192.168.3.0     10.0.0.5        1852        0x80000002 0x006458
+
+=============show ip ospf database router=============
+
+OSPF Router with ID (10.0.0.6) (Process ID 100)
+
+		Router Link States (Area 56)
+
+  LS age: 78
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 10.0.0.5
+  Advertising Router: 10.0.0.5
+  LS Seq Number: 80000005
+  Checksum: 0x570D
+  Length: 48
+  Area Border Router
+  Number of Links: 2
+
+    Link connected to: another Router (point-to-point)
+     (Link ID) Neighboring Router ID: 10.0.0.6
+     (Link Data) Router Interface address: 10.56.1.5
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.56.1.0
+     (Link Data) Network Mask: 255.255.255.0
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+
+  LS age: 86
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 10.0.0.6
+  Advertising Router: 10.0.0.6
+  LS Seq Number: 80000007
+  Checksum: 0xF5EA
+  Length: 60
+  Number of Links: 3
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 192.168.6.0
+     (Link Data) Network Mask: 255.255.255.0
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: another Router (point-to-point)
+     (Link ID) Neighboring Router ID: 10.0.0.5
+     (Link Data) Router Interface address: 10.56.1.6
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.56.1.0
+     (Link Data) Network Mask: 255.255.255.0
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+=============show ip ospf database network=============
+
+OSPF Router with ID (10.0.0.6) (Process ID 100)
+
+=============show ip ospf database summary=============
+
+OSPF Router with ID (10.0.0.6) (Process ID 100)
+
+		Summary Net Link States (Area 56)
+
+  LS age: 337
+  Options: (No TOS-capability, DC, Upward)
+  LS Type: Summary Links(Network)
+  Link State ID: 10.0.0.1 (summary Network Number)
+  Advertising Router: 10.0.0.5
+  LS Seq Number: 80000003
+  Checksum: 0xA874
+  Length: 28
+  Network Mask: /32
+	MTID: 0 	Metric: 4 
+
+  LS age: 337
+  Options: (No TOS-capability, DC, Upward)
+  LS Type: Summary Links(Network)
+  Link State ID: 10.0.0.3 (summary Network Number)
+  Advertising Router: 10.0.0.5
+  LS Seq Number: 80000003
+  Checksum: 0x9486
+  Length: 28
+  Network Mask: /32
+	MTID: 0 	Metric: 4 
+
+  LS age: 337
+  Options: (No TOS-capability, DC, Upward)
+  LS Type: Summary Links(Network)
+  Link State ID: 10.24.1.0 (summary Network Number)
+  Advertising Router: 10.0.0.5
+  LS Seq Number: 80000003
+  Checksum: 0x7294
+  Length: 28
+  Network Mask: /24
+	MTID: 0 	Metric: 2 
+
+  LS age: 337
+  Options: (No TOS-capability, DC, Upward)
+  LS Type: Summary Links(Network)
+  Link State ID: 10.45.1.0 (summary Network Number)
+  Advertising Router: 10.0.0.5
+  LS Seq Number: 80000003
+  Checksum: 0x6B87
+  Length: 28
+  Network Mask: /24
+	MTID: 0 	Metric: 1 
+
+  LS age: 337
+  Options: (No TOS-capability, DC, Upward)
+  LS Type: Summary Links(Network)
+  Link State ID: 10.123.1.0 (summary Network Number)
+  Advertising Router: 10.0.0.5
+  LS Seq Number: 80000003
+  Checksum: 0xD3CE
+  Length: 28
+  Network Mask: /24
+	MTID: 0 	Metric: 3 
+
+  LS age: 337
+  Options: (No TOS-capability, DC, Upward)
+  LS Type: Summary Links(Network)
+  Link State ID: 192.168.1.0 (summary Network Number)
+  Advertising Router: 10.0.0.5
+  LS Seq Number: 80000003
+  Checksum: 0x7845
+  Length: 28
+  Network Mask: /24
+	MTID: 0 	Metric: 4 
+
+  LS age: 1855
+  Options: (No TOS-capability, DC, Upward)
+  LS Type: Summary Links(Network)
+  Link State ID: 192.168.3.0 (summary Network Number)
+  Advertising Router: 10.0.0.5
+  LS Seq Number: 80000002
+  Checksum: 0x6458
+  Length: 28
+  Network Mask: /24
+	MTID: 0 	Metric: 4
+
