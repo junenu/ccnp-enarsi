@@ -1,0 +1,11 @@
+desktop2:~$ ping 2001:db8:0:1:5054:ff:fe0c:dfea -c 5
+PING 2001:db8:0:1:5054:ff:fe0c:dfea (2001:db8:0:1:5054:ff:fe0c:dfea): 56 data bytes
+64 bytes from 2001:db8:0:1:5054:ff:fe0c:dfea: seq=0 ttl=60 time=2.962 ms
+64 bytes from 2001:db8:0:1:5054:ff:fe0c:dfea: seq=1 ttl=60 time=3.512 ms
+64 bytes from 2001:db8:0:1:5054:ff:fe0c:dfea: seq=2 ttl=60 time=3.472 ms
+64 bytes from 2001:db8:0:1:5054:ff:fe0c:dfea: seq=3 ttl=60 time=3.553 ms
+64 bytes from 2001:db8:0:1:5054:ff:fe0c:dfea: seq=4 ttl=60 time=4.160 ms
+
+--- 2001:db8:0:1:5054:ff:fe0c:dfea ping statistics ---
+5 packets transmitted, 5 packets received, 0% packet loss
+round-trip min/avg/max = 2.962/3.531/4.160 ms
