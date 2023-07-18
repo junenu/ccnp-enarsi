@@ -1,0 +1,64 @@
+RT3#show ospfv3 database 
+
+          OSPFv3 100 address-family ipv6 (router-id 10.0.0.3)
+
+                Router Link States (Area 0)
+
+ADV Router       Age         Seq#        Fragment ID  Link count  Bits
+ 10.0.0.1        598         0x8000000D  0            1           None
+ 10.0.0.2        815         0x8000000B  0            2           None
+ 10.0.0.3        692         0x8000000B  0            1           B
+
+                Net Link States (Area 0)
+
+ADV Router       Age         Seq#        Link ID    Rtr count
+ 10.0.0.1        1368        0x80000003  3          2
+
+                Inter Area Prefix Link States (Area 0)
+
+ADV Router       Age         Seq#        Prefix
+ 10.0.0.3        692         0x80000002  2001:DB8:0:4::/64
+
+                Link (Type-8) Link States (Area 0)
+
+ADV Router       Age         Seq#        Link ID    Interface
+ 10.0.0.2        553         0x80000005  3          Gi0/0
+ 10.0.0.3        692         0x80000005  2          Gi0/0
+
+                Intra Area Prefix Link States (Area 0)
+
+ADV Router       Age         Seq#        Link ID    Ref-lstype  Ref-LSID
+ 10.0.0.1        1111        0x80000009  0          0x2001      0
+ 10.0.0.2        553         0x80000007  0          0x2001      0
+ 10.0.0.3        692         0x80000007  0          0x2001      0
+
+                Router Link States (Area 34)
+
+ADV Router       Age         Seq#        Fragment ID  Link count  Bits
+ 10.0.0.3        692         0x80000006  0            1           B
+ 10.0.0.4        457         0x8000000E  0            1           B
+
+                Net Link States (Area 34)
+
+ADV Router       Age         Seq#        Link ID    Rtr count
+ 10.0.0.3        951         0x80000003  3          2
+
+                Inter Area Prefix Link States (Area 34)
+
+ADV Router       Age         Seq#        Prefix
+ 10.0.0.3        951         0x80000003  2001:DBB::3/128
+ 10.0.0.3        692         0x80000002  2001:DBB::2/128
+ 10.0.0.3        692         0x80000002  2001:DBB::1/128
+ 10.0.0.3        692         0x80000002  2001:DB8:0:1::/64
+ 10.0.0.4        713         0x80000002  2001:DBB::4/128
+
+                Link (Type-8) Link States (Area 34)
+
+ADV Router       Age         Seq#        Link ID    Interface
+ 10.0.0.3        692         0x80000004  3          Gi0/1
+ 10.0.0.4        713         0x80000005  3          Gi0/1
+
+                Intra Area Prefix Link States (Area 34)
+
+ADV Router       Age         Seq#        Link ID    Ref-lstype  Ref-LSID
+ 10.0.0.4        713         0x80000004  0          0x2001      0
