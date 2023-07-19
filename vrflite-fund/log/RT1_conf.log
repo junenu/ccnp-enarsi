@@ -1,0 +1,98 @@
+inserthostname-here>en
+inserthostname-here#conf
+inserthostname-here#configure 
+Configuring from terminal, memory, or network [terminal]? 
+Enter configuration commands, one per line.  End with CNTL/Z.
+inserthostname-here(config)#hos
+inserthostname-here(config)#hostname RT1
+RT1(config)#no ip dom
+RT1(config)#no ip domainloo
+RT1(config)#no ip domai    
+RT1(config)#no ip domain-
+RT1(config)#no ip domain-loo
+RT1(config)#no ip domain-lookup 
+RT1(config)#ip vrf RED
+RT1(config-vrf)#exit
+RT1(config)#ip vrf GREEN
+RT1(config-vrf)#exit        
+RT1(config)#ip vrf BLUE 
+RT1(config-vrf)#exit
+RT1(config)#do show ip vrf
+  Name                             Default RD            Interfaces
+  BLUE                             <not set>             
+  GREEN                            <not set>             
+  RED                              <not set>             
+RT1(config)#int
+RT1(config)#interface gi
+RT1(config)#interface gigabitEthernet 0/0
+RT1(config-if)#ip vr
+RT1(config-if)#ip vrf fo
+RT1(config-if)#ip vrf forwarding RED
+RT1(config-if)#exit
+RT1(config)#interface gigabitEthernet 0/1
+RT1(config-if)#ip vrf fo
+RT1(config-if)#ip vrf forwarding G
+RT1(config-if)#ip vrf forwarding GREEN 
+RT1(config-if)#exit
+RT1(config)#interface gigabitEthernet 0/2
+RT1(config-if)#ip vrf forwarding B          
+RT1(config-if)#ip vrf forwarding BLUE 
+RT1(config-if)#exit
+RT1(config)#do show ip vrf               
+  Name                             Default RD            Interfaces
+  BLUE                             <not set>             Gi0/2
+  GREEN                            <not set>             Gi0/1
+  RED                              <not set>             Gi0/0
+RT1(config)#conf
+RT1(config)#int           
+RT1(config)#interface gi
+RT1(config)#interface gigabitEthernet 0/3.1
+RT1(config-subif)#ip vrf fo
+RT1(config-subif)#ip vrf forwarding R
+RT1(config-subif)#ip vrf forwarding RED 
+RT1(config-subif)#exit
+RT1(config)#interface gigabitEthernet 0/3.2
+RT1(config-subif)#ip vrf f
+RT1(config-subif)#ip vrf forwarding G
+RT1(config-subif)#ip vrf forwarding GREEN 
+RT1(config-subif)#exit
+RT1(config)#interface gigabitEthernet 0/3.3
+RT1(config-subif)#ip vrf fo
+RT1(config-subif)#ip vrf forwarding B
+RT1(config-subif)#ip vrf forwarding BLUE 
+RT1(config-subif)#exit
+RT1(config)#do show ip vrf
+  Name                             Default RD            Interfaces
+  BLUE                             <not set>             Gi0/2
+                                                         Gi0/3.3
+  GREEN                            <not set>             Gi0/1
+                                                         Gi0/3.2
+  RED                              <not set>             Gi0/0
+                                                         Gi0/3.1
+RT1(config)#int gig 0/0
+RT1(config-if)#ip add 10.0.1.1 255.255.255.0
+RT1(config-if)#int gig 0/1                  
+RT1(config-if)#ip add 172.16.1.1 255.255.255.0
+RT1(config-if)#int gig 0/2                    
+RT1(config-if)#ip add 192.168.1.1 255.255.255.0
+RT1(config-if)#int gig 0/3.1                   
+RT1(config-subif)#en 
+RT1(config-subif)#encapsulation do
+RT1(config-subif)#encapsulation dot1Q 100
+RT1(config-subif)#ip add
+RT1(config-subif)#ip address 10.0.12.1 255.255.255.0
+RT1(config-subif)#int gig 0/3.2                     
+RT1(config-subif)#encapsulation dot1Q 200           
+RT1(config-subif)#ip address 172.16.12.1 255.255.255.0
+RT1(config-subif)#int gig 0/3.3                       
+RT1(config-subif)#encapsulation dot1Q 300             
+RT1(config-subif)#ip address 192.168.12.1 255.255.255.0
+RT1(config-subif)#exit
+RT1(config)#do show ip vrf interface
+Interface              IP-Address      VRF                              Protocol
+Gi0/2                  192.168.1.1     BLUE                             down    
+Gi0/3.3                192.168.12.1    BLUE                             down    
+Gi0/1                  172.16.1.1      GREEN                            down    
+Gi0/3.2                172.16.12.1     GREEN                            down    
+Gi0/0                  10.0.1.1        RED                              down    
+Gi0/3.1                10.0.12.1       RED                              down  

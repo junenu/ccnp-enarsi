@@ -1,0 +1,2 @@
+sudo ip addr add 10.0.3.10/24 dev ens2
+sudo ip route add default via 10.0.3.3

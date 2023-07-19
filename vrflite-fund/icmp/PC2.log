@@ -1,0 +1,13 @@
+cisco@inserthostname-here:~$ sudo ip addr add 172.16.1.10/24 dev ens2
+sudo ip route add default via 172.16.1.1
+cisco@inserthostname-here:~$ ping 172.16.3.10 -c 5
+PING 172.16.3.10 (172.16.3.10) 56(84) bytes of data.
+64 bytes from 172.16.3.10: icmp_seq=1 ttl=61 time=6.29 ms
+64 bytes from 172.16.3.10: icmp_seq=2 ttl=61 time=3.15 ms
+64 bytes from 172.16.3.10: icmp_seq=3 ttl=61 time=3.22 ms
+64 bytes from 172.16.3.10: icmp_seq=4 ttl=61 time=2.86 ms
+64 bytes from 172.16.3.10: icmp_seq=5 ttl=61 time=2.83 ms
+
+--- 172.16.3.10 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 2.827/3.668/6.287/1.318 ms

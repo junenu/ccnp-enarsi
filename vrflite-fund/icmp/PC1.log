@@ -1,0 +1,11 @@
+cisco@inserthostname-here:~$ ping 10.0.3.10 -c 5
+PING 10.0.3.10 (10.0.3.10) 56(84) bytes of data.
+64 bytes from 10.0.3.10: icmp_seq=1 ttl=61 time=5.75 ms
+64 bytes from 10.0.3.10: icmp_seq=2 ttl=61 time=3.02 ms
+64 bytes from 10.0.3.10: icmp_seq=3 ttl=61 time=3.34 ms
+64 bytes from 10.0.3.10: icmp_seq=4 ttl=61 time=2.82 ms
+64 bytes from 10.0.3.10: icmp_seq=5 ttl=61 time=2.76 ms
+
+--- 10.0.3.10 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 2.761/3.539/5.749/1.123 ms
