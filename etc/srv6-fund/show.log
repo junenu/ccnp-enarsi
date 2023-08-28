@@ -1,0 +1,127 @@
+RP/0/RP0/CPU0:xr9kv1#show route vrf one
+Mon Aug 28 13:10:34.527 UTC
+
+Codes: C - connected, S - static, R - RIP, B - BGP, (>) - Diversion path
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - ISIS, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, su - IS-IS summary null, * - candidate default
+       U - per-user static route, o - ODR, L - local, G  - DAGR, l - LISP
+       A - access/subscriber, a - Application route
+       M - mobile route, r - RPL, t - Traffic Engineering, (!) - FRR Backup path
+
+Gateway of last resort is not set
+
+C    192.168.1.0/24 is directly connected, 00:28:25, GigabitEthernet0/0/0/0
+L    192.168.1.1/32 is directly connected, 00:28:25, GigabitEthernet0/0/0/0
+B    192.168.2.0/24 [200/0] via fc00::3 (nexthop in vrf default), 00:15:51
+RP/0/RP0/CPU0:xr9kv1#show isis nei
+Mon Aug 28 13:10:40.833 UTC
+
+IS-IS 100 neighbors:
+System Id      Interface        SNPA           State Holdtime Type IETF-NSF
+xr9kv2         Gi0/0/0/1        5254.0008.b56d Up    22       L2   Capable 
+
+Total neighbor count: 1
+RP/0/RP0/CPU0:xr9kv1#show bgp all all su
+Mon Aug 28 13:11:00.084 UTC
+
+Address Family: VPNv4 Unicast
+-----------------------------
+
+BGP router identifier 10.0.0.1, local AS number 65000
+BGP generic scan interval 60 secs
+Non-stop routing is enabled
+BGP table state: Active
+Table ID: 0x0
+BGP main routing table version 7
+BGP NSR Initial initsync version 3 (Reached)
+BGP NSR/ISSU Sync-Group versions 0/0
+BGP scan interval 60 secs
+
+BGP is operating in STANDALONE mode.
+
+
+Process       RcvTblVer   bRIB/RIB   LabelVer  ImportVer  SendTblVer  StandbyVer
+Speaker               7          7          7          7           7           0
+
+Neighbor        Spk    AS MsgRcvd MsgSent   TblVer  InQ OutQ  Up/Down  St/PfxRcd
+fc00::3           0 65000      24      23        7    0    0 00:20:23          1
+
+RP/0/RP0/CPU0:xr9kv1#show segme srv6 sid
+Mon Aug 28 13:11:15.955 UTC
+
+*** Locator: 'mylocator' *** 
+
+SID                         Behavior          Context                           Owner               State  RW
+--------------------------  ----------------  --------------------------------  ------------------  -----  --
+fc00:0:0:1:1::              End (PSP/USD)     'default':1                       sidmgr              InUse  Y 
+fc00:0:0:1:40::             End.DT4           'one'                             bgp-65000           InUse  Y 
+fc00:0:0:1:41::             End.X (PSP/USD)   [Gi0/0/0/1, Link-Local]           isis-100            InUse  Y 
+
+
+
+
+
+RP/0/RP0/CPU0:xr9kv3#show route vrf one
+Mon Aug 28 13:11:50.424 UTC
+
+Codes: C - connected, S - static, R - RIP, B - BGP, (>) - Diversion path
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - ISIS, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, su - IS-IS summary null, * - candidate default
+       U - per-user static route, o - ODR, L - local, G  - DAGR, l - LISP
+       A - access/subscriber, a - Application route
+       M - mobile route, r - RPL, t - Traffic Engineering, (!) - FRR Backup path
+
+Gateway of last resort is not set
+
+B    192.168.1.0/24 [200/0] via fc00::1 (nexthop in vrf default), 00:17:07
+C    192.168.2.0/24 is directly connected, 00:27:53, GigabitEthernet0/0/0/1
+L    192.168.2.1/32 is directly connected, 00:27:53, GigabitEthernet0/0/0/1
+RP/0/RP0/CPU0:xr9kv3#show isis neighbors 
+Mon Aug 28 13:11:55.987 UTC
+
+IS-IS 100 neighbors:
+System Id      Interface        SNPA           State Holdtime Type IETF-NSF
+xr9kv2         Gi0/0/0/0        5254.001b.d65e Up    8        L2   Capable 
+
+Total neighbor count: 1
+RP/0/RP0/CPU0:xr9kv3#show bgp al al su
+Mon Aug 28 13:12:02.242 UTC
+
+Address Family: VPNv4 Unicast
+-----------------------------
+
+BGP router identifier 10.0.0.3, local AS number 65000
+BGP generic scan interval 60 secs
+Non-stop routing is enabled
+BGP table state: Active
+Table ID: 0x0
+BGP main routing table version 8
+BGP NSR Initial initsync version 3 (Reached)
+BGP NSR/ISSU Sync-Group versions 0/0
+BGP scan interval 60 secs
+
+BGP is operating in STANDALONE mode.
+
+
+Process       RcvTblVer   bRIB/RIB   LabelVer  ImportVer  SendTblVer  StandbyVer
+Speaker               8          8          8          8           8           0
+
+Neighbor        Spk    AS MsgRcvd MsgSent   TblVer  InQ OutQ  Up/Down  St/PfxRcd
+fc00::1           0 65000      24      25        8    0    0 00:21:25          1
+
+RP/0/RP0/CPU0:xr9kv3#show seg srv6 sid
+Mon Aug 28 13:12:11.280 UTC
+
+*** Locator: 'mylocator' *** 
+
+SID                         Behavior          Context                           Owner               State  RW
+--------------------------  ----------------  --------------------------------  ------------------  -----  --
+fc00:0:0:3:1::              End (PSP/USD)     'default':1                       sidmgr              InUse  Y 
+fc00:0:0:3:40::             End.DT4           'one'                             bgp-65000           InUse  Y 
+fc00:0:0:3:41::             End.X (PSP/USD)   [Gi0/0/0/0, Link-Local]           isis-100            InUse  Y 
